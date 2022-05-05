@@ -17,6 +17,8 @@ export class MarsRoverSender implements ISendNotifications {
 
     send(message: string): void {
         let messageParts: string[] = message.split(" ");
+        // Position + Meaning connascence, assuming message has an order
+        // Fix by instantiating message into a class
         this.nasaAntenna.received([
             "X" + messageParts[0],
             "Y" + messageParts[1],
@@ -25,6 +27,7 @@ export class MarsRoverSender implements ISendNotifications {
     }
 
     sendError(): void {
+        // Meaning -> ER could be in a const somewhere
         this.nasaAntenna.received(["ER"])
     }
 

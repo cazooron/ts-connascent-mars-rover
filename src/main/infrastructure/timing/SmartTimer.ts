@@ -3,6 +3,7 @@ import {INotifier} from "../INotifier";
 import {Timer} from "./Timer";
 import {TimerTask} from "./TimerTask";
 
+
 export class SmartTimer implements ISmartTimer {
     private millisecondsToWait!: number;
     private isRunning: boolean = false;
@@ -20,6 +21,7 @@ export class SmartTimer implements ISmartTimer {
     }
 
     beforeDoing(notifier: INotifier, datagrams: Array<string>): ISmartTimer {
+        // This is some wierd code
         this.notifier = notifier;
         const self = this;
         this.task = new class implements TimerTask {

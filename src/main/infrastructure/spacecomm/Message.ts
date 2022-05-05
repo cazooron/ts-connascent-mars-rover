@@ -17,6 +17,7 @@ export class Message {
 
     private parsePosition(datagrams: Array<string>) {
         for (let datagram of datagrams) {
+            // Meaning
             if(datagram.startsWith("X"))
                 this.x = datagram.substring(1);
             if(datagram.startsWith("Y"))
@@ -26,6 +27,7 @@ export class Message {
             if(datagram.startsWith("M"))
                 this.commandsCount = Number.parseInt(datagram.substring(1));
         }
+        // Meaning here, 100,100?
         return format("100 100\n%s %s %s\n", this.x, this.y, this.direction);
     }
 
@@ -43,9 +45,13 @@ export class Message {
 
 
     private parseCommands(datagrams: Array<string>) {
+        // Is this a default?
         let commandMessage: string = "";
+        // Commandnumber starts with 1 why?
         for (let commandNumber = 1; commandNumber <= this.commandsCount; commandNumber++) {
             for (let datagram of datagrams) {
+                // Meaning -> Is common across repo to parse the datagram?
+                    // Fix by moving datagram into it's own class with comparator
                 if(datagram.startsWith(commandNumber.toString())) {
                     commandMessage += datagram.substring(1);
                 }

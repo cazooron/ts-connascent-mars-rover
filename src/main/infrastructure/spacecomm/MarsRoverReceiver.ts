@@ -8,6 +8,7 @@ export class MarsRoverReceiver implements IWriteToServiceBus {
     private marsRoverServiceBus!: IMessageReceivedBus;
     private datagrams: Array<string> = new Array<string>();
     private smartTimer: SmartTimer = new SmartTimer();
+
     private notifier: INotifier = new class implements INotifier {
         private receiver: MarsRoverReceiver;
         constructor(receiver: MarsRoverReceiver) {
@@ -37,6 +38,7 @@ export class MarsRoverReceiver implements IWriteToServiceBus {
             .beforeDoing(this.notifier, this.datagrams);
     }
 
+    // Naming -> if we change notify message, we also will want to change this method as well
     private notifyMessage2(datagrams: Array<string>): void {
         let message: Message = new Message(datagrams);
         if(message.isValid()) {
